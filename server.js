@@ -30,10 +30,17 @@ app.get('/usuarios', async(req, res) => {
                 name: req.query.name,
                 email: req.query.email,
                 age: req.query.age
-            }
+            }, orderBy:{
+                name: 'asc'
+            } 
         })
     } else{
-        users = await prisma.user.findMany()
+        users = await prisma.user.findMany({
+            orderBy:{
+                name: 'asc'
+            }
+        })
+        
     }
 
     res.status(200).json(users)
